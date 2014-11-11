@@ -6,8 +6,8 @@ Gem::Specification.new do |spec|
   spec.version       = "0.0.1"
   spec.authors       = ["Shinohara Teruki"]
   spec.email         = ["ts_3156@yahoo.co.jp"]
-  spec.description   = %q{A thin wrapper for google-api-ruby-client}
-  spec.summary       = %q{A thin wrapper for google-api-ruby-client}
+  spec.description   = %q{I just want to copy files on google drive.}
+  spec.summary       = %q{I just want to copy files on google drive.}
   spec.license       = "Apache 2.0"
   spec.homepage      = "https://github.com/ts-3156/easy-drive"
 
