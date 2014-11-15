@@ -1,6 +1,11 @@
 require 'easy_drive/files'
 require 'easy_drive/version'
 
+require 'google/api_client'
+require 'google/api_client/client_secrets'
+require 'google/api_client/auth/file_storage'
+require 'google/api_client/auth/installed_app'
+
 module EasyDrive
   class Client
     include EasyDrive::Files
@@ -45,8 +50,8 @@ module EasyDrive
     end
     
     def setup()
-      client = Google::APIClient.new(:application_name => @application_name,
-          :application_version => '1.0.0')
+      client = Google::APIClient.new(:application_name => self.class.to_s,
+          :application_version => version)
     
       file_storage = Google::APIClient::FileStorage.new(CREDENTIAL_STORE_FILE)
       if file_storage.authorization.nil?
@@ -81,7 +86,7 @@ module EasyDrive
 
     # @return [String]
     def version
-      "#{Twitter::Version}"
+      "#{EasyDrive::Version}"
     end
   end
 end
