@@ -1,3 +1,8 @@
 /Gemfile.lock
 /.bundle
 /pkg
+
+/client_secrets.json
+/easy_drive-oauth2.json
+/easy_drive-v2.cache
+
