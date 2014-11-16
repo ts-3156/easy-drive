@@ -1,5 +1,6 @@
 module EasyDrive
   module Files
+    # Gets a file's metadata by ID
     # @param file_id [String]
     #   ID of the file to get
     # @return [Google::APIClient::Schema::Drive::V2::File]
@@ -22,6 +23,7 @@ module EasyDrive
       end
     end
 
+    # Insert(Upload) a new file
     # @param file_name [String]
     #   Name of file to upload
     # @param folder_id [String]
@@ -61,6 +63,7 @@ module EasyDrive
     end
     alias_method :upload, :insert
 
+    # Creates a copy of the specified file
     # @param file_id [String]
     #   ID of the origin file to copy
     # @param folder_id [String]
