@@ -1,6 +1,28 @@
 module EasyDrive
   module Files
     # @param file_id [String]
+    #   ID of the file to get
+    # @return [Google::APIClient::Schema::Drive::V2::File]
+    #   The got file if successful, nil otherwise
+    #   @see https://developers.google.com/drive/v2/reference/files
+    def get(file_id)
+      client = self.client
+      drive = self.drive
+
+      result = client.execute(
+        :api_method => drive.files.get,
+        :parameters => {
+          'fileId' => file_id,
+          'alt' => 'json'})
+
+      if result.status == 200
+        result.data
+      else
+        puts "An error occurred: #{result.data['error']['message']}"
+      end
+    end
+
+    # @param file_id [String]
     #   ID of the origin file to copy
     # @param folder_id [String]
     #   ID of the destination folder which contains this file
