@@ -12,7 +12,7 @@ Add EasyDrive to your `Gemfile`.
 gem 'easy_drive'
 ```
 
-Usage
+Initial Setup
 ----
 
 1. You need to enable the Drive API for your app and download `client_secrets.json` to your project root directory.
@@ -28,9 +28,13 @@ Usage
     client.setup # generate above 2 files.
     ```
 
-That's all. Feel free to copy! (^^)
+Usage
+----
 
 ```
 client = EasyDrive::Client.new
 client.copy(source_file_id, dest_folder_id, {title: 'new file name'})
 ```
+
+That's all. Feel free to copy! (^^)
+
