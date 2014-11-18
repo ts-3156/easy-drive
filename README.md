@@ -38,3 +38,21 @@ client.copy(source_file_id, dest_folder_id, {title: 'new file name'})
 
 That's all. Feel free to copy! (^^)
 
+Advanced Usage
+----
+
+EasyDrive implements other Google Drive APIs.
+
+Gets a file's metadata by ID.
+
+```
+client.get(file_id)
+```
+
+Insert(Upload) a new file.
+
+```
+client.insert('/etc/hello.txt', folder_id, {title: 'This is a new file.'})
+```
+
+
