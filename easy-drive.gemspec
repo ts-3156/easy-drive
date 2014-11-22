@@ -3,7 +3,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "easy-drive"
-  spec.version       = "0.0.1"
+  spec.version       = "0.0.2"
   spec.authors       = ["Shinohara Teruki"]
   spec.email         = ["ts_3156@yahoo.co.jp"]
   spec.description   = %q{I just want to copy files on google drive.}
