@@ -55,4 +55,21 @@ Insert(Upload) a new file.
 client.insert('/etc/hello.txt', folder_id, {title: 'This is a new file.'})
 ```
 
+Lists the user's all files.
+
+```
+client.list
+```
+
+Search files.
+
+```
+client.list({title: 'TITLE TEXT for searching'})
+```
+
+Search files in a specific folder.
+
+```
+client.list({title: 'TITLE TEXT for searching', folder_id: 'FOLDER_ID'})
+```
 

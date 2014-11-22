@@ -95,6 +95,74 @@ module EasyDrive
         puts "An error occurred: #{result.data['error']['message']}"
       end
     end
+
+    # Lists files.
+    # @param options [Hash] A customizable set of options.
+    #   @option options [String] :title The title for searching
+    #   @option options [String] :folder_id The parent folder ID for searching
+    #
+    # @return [Array<Google::APIClient::Schema::Drive::V2::File>]
+    #   List of File resources.
+    #   @see https://developers.google.com/drive/v2/reference/files
+    def list(options = {})
+      client = self.client
+      drive = self.drive
+
+      params = {
+        "maxResults" => 1000
+      }
+
+      if options.has_key?(:title)
+        params['q'] = "title = '#{options[:title]}'"
+      end
+
+      api_method =
+        if options.has_key?(:folder_id)
+          params['folderId'] = options[:folder_id]
+          drive.children.list
+        else
+          drive.files.list
+        end
+
+      result = []
+      page_token = nil
+      begin
+        if page_token.to_s != ''
+          params['pageToken'] = page_token
+        end
+        api_result = client.execute(
+          :api_method => api_method,
+          :parameters => params)
+
+        if api_result.status == 200
+          files = api_result.data
+          result.concat(files.items)
+          page_token = files.next_page_token
+        else
+          puts "An error occurred: #{result.data['error']['message']}"
+          page_token = nil
+        end
+      end while page_token.to_s != ''
+
+      if result.size > 0 && 
+        result.first.class.name == 'Google::APIClient::Schema::Drive::V2::ChildReference'
+
+        _result = []
+        batch = Google::APIClient::BatchRequest.new
+        result.each do |r|
+          batch.add(
+            :api_method => drive.files.get,
+            :parameters => {
+              'fileId' => r.id,
+              'alt' => 'json'}
+          ){|api_result| _result.push(api_result.data) }
+        end        
+        client.execute(batch)
+        result = _result
+      end
+
+      result
+    end
   end
 end
 
