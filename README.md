@@ -73,3 +73,17 @@ Search files in a specific folder.
 client.list({title: 'TITLE TEXT for searching', folder_id: 'FOLDER_ID'})
 ```
 
+EasyDrive is a wrapper of [google-api-ruby-client](https://github.com/google/google-api-ruby-client).  
+So, you can call methods of google-api-ruby-client directly.
+
+```
+easy_drive_client = EasyDrive::Client.new
+result = easy_drive_client.client.execute(
+  :api_method => easy_drive_client.drive.files.get,
+  :parameters => {
+    'fileId' => 'file_id',
+    'alt' => 'json'
+  }
+)
+```
+
